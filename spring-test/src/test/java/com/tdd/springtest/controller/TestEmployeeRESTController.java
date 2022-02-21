@@ -1,5 +1,7 @@
 package com.tdd.springtest.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tdd.springtest.models.Employee;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,26 @@ public class TestEmployeeRESTController {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").value(1));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1));
+    }
+
+    @Test
+    public void createEmployeeAPI() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .post("/employees")
+                .content(asJsonString(new Employee(null, "firstName4", "lastName4", "email4@mail.com")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
