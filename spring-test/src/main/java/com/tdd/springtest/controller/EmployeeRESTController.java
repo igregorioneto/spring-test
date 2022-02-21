@@ -33,7 +33,7 @@ public class EmployeeRESTController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Employee> addEmployee(@PathVariable("id") long id) {
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") long id) {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 }
