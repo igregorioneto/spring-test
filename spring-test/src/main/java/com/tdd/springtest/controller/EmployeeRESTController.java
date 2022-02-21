@@ -18,7 +18,7 @@ public class EmployeeRESTController {
     }
 
     @GetMapping("/{id}")
-    public RequestEntity<Employee> getEmployeeById(@PathVariable("id") int id) {
+    public RequestEntity<Employee> getEmployeeById(@PathVariable("id") long id) {
         return null;
     }
 
@@ -28,8 +28,12 @@ public class EmployeeRESTController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") int id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee) {
         return new ResponseEntity(employee, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Employee> addEmployee(@PathVariable("id") long id) {
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
 }

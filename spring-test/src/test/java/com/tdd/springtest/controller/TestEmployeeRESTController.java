@@ -67,6 +67,12 @@ public class TestEmployeeRESTController {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email2@mail.com"));
     }
 
+    @Test
+    public void deleteEmployeeAPI() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.delete("/employees/{id}", 1L))
+                .andExpect(status().isAccepted());
+    }
+
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
