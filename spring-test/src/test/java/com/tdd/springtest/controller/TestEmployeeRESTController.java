@@ -54,6 +54,19 @@ public class TestEmployeeRESTController {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
 
+    @Test
+    public void updateEmployeeAPI() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .put("/employees/{id}", 2L)
+                .content(asJsonString(new Employee(2L, "firstName2", "lastName2", "email2@mail.com")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("firstName2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("lastName2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email2@mail.com"));
+    }
+
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

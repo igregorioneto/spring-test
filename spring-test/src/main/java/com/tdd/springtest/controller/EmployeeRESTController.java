@@ -27,4 +27,9 @@ public class EmployeeRESTController {
         return new ResponseEntity(employee, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") int id, @RequestBody Employee employee) {
+        return new ResponseEntity(employee, HttpStatus.OK);
+    }
+
 }
